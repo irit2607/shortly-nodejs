@@ -12,6 +12,8 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views',);
 
+app.use('/static', express.static(__dirname + '/static'));
+
 app.use(express.urlencoded({ extended: true }));
 
 const mongoURI = require('./config/mongoKey');
