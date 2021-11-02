@@ -96,8 +96,13 @@ router.use(useRoutes);
 
 
 
-router.get('/dashboard',checkAuth, (req,res) => {
-    res.render('dashboard',{verified: req.user.isVerified, logged : true } );
+router.get('/dashboard', checkAuth, (req, res) => {
+
+    urls.find({ owned : req.user.email }, (err, data) => {
+        if(err) throw err;       
+        res.render('dashboard', { verified: req.user.isVerified, logged: true,  urls : data });        
+    });
+
 });
 
 router.post('/create',checkAuth, (req,res) => {
